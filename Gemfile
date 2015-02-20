@@ -47,3 +47,5 @@ gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
 gem 'formtastic', github: 'justinfrench/formtastic'
+
+gem 'bootstrap-sass', '~> 3.3.1'
