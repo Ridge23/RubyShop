@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20150220181146) do
     t.integer  "priority_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
   end
 
   create_table "items", force: true do |t|
@@ -62,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150220181146) do
     t.integer  "priority_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
   create_table "users", force: true do |t|
