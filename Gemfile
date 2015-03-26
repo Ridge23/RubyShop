@@ -49,3 +49,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
 gem 'bootstrap-sass', '~> 3.3.1'
+
+gem "paperclip", "~> 4.2"
+
+gem 'will_paginate', '~> 3.0.6'

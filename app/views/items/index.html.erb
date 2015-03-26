@@ -1,0 +1,30 @@
+<h2><%= @category.name %></h2>
+Items on page:
+<form method="GET" >
+    <select name="per_page" onchange="this.form.submit()">
+      <% @pages_count.each do |num| %>
+        <option <% if ( @per_page == num ) %>selected<% end %> ><%= num %></option>
+      <% end %>
+    </select>
+</form>
+<div class="row">
+  <% @items.each do |item| %>
+      <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+          <%= image_tag item.image.url(:thumb) %>
+
+          <div class="caption">
+            <h4 class="pull-right"><%= item.price %> $</h4>
+            <h4><a href="<%= item_show_path(item.id)%>"><%= item.name %></a>
+            </h4>
+
+            <p><%= item.short_description %>
+              <a  href="<%= item_show_path(item.id)%>">more</a></p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+</div>
+
+<%= will_paginate @posts %>

@@ -34,15 +34,15 @@
     <% @items.each do |item| %>
     <div class="col-sm-4 col-lg-4 col-md-4">
       <div class="thumbnail">
-        <img src="http://placehold.it/320x150" alt="">
+        <%= image_tag item.image.url(:thumb) %>
 
         <div class="caption">
           <h4 class="pull-right"><%= item.price %> $</h4>
-          <h4><a href="#"><%= item.name %></a>
+          <h4><a href="<%= item_show_path(item.id)%>"><%= item.name %></a>
           </h4>
 
           <p><%= item.short_description %>
-            <a target="_blank" href="http://www.bootsnipp.com">more</a></p>
+            <a  href="<%= item_show_path(item.id)%>">more</a></p>
         </div>
       </div>
     </div>

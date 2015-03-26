@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'items/:cat_id', to: 'items#index', as: 'items_root'
+
+  get 'items/show/:id', to: 'items#show', as: 'item_show'
+
   get 'persons/profile'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
