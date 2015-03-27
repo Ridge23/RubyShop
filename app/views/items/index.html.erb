@@ -5,17 +5,24 @@
     Search
   <% end %>
 </h2>
-<form method="GET" >
-    Items on page:
-    <select name="per_page" onchange="this.form.submit()">
-      <% @pages_count.each do |num| %>
-        <option <% if ( @per_page == num ) %>selected<% end %> ><%= num %></option>
-      <% end %>
-    </select>
-    Search:
-    <input type="text" name="search_string" value="<%= @search %>" />
-    <input type="submit" value="Search"  />
-</form>
+<div class="row">
+    <form method="GET" >
+        Items on page:
+        <select name="per_page" onchange="this.form.submit()">
+          <% @pages_count.each do |num| %>
+            <option <% if ( @per_page == num ) %>selected<% end %> ><%= num %></option>
+          <% end %>
+        </select>
+        Sort By:
+        <select name="sort_by" onchange="this.form.submit()">
+            <option value="name" <% if ( @sort_by == 'name' ) %>selected<% end %> >Name</option>
+            <option value="price" <% if ( @sort_by == 'price' ) %>selected<% end %>>Price</option>
+        </select>
+        Search:
+        <input type="text" name="search_string" value="<%= @search %>" />
+        <input type="submit" value="Search"  />
+    </form>
+</div>
 <div class="row">
   <% @items.each do |item| %>
       <div class="col-sm-4 col-lg-4 col-md-4">

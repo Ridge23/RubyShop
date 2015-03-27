@@ -3,15 +3,13 @@ class ItemsController < ApplicationController
   before_action :set_pages
 
   def index
-
-
     if !params[:search_string]
-      @items = Item.where(category_id: params[:cat_id]).paginate(:page => params[:page], :per_page => @per_page)
+      @items = Item.where(category_id: params[:cat_id]).paginate(:page => params[:page], :per_page => @per_page).order("#{@sort_by} ASC")
     else
       @search = params[:search_string]
       wildcard_search = "%#{@search}%"
       cat_id = params[:cat_id]
-      @items = Item.where("name LIKE ? AND category_id = ?" , "%#{wildcard_search}%", cat_id).paginate(:page => params[:page], :per_page => @per_page)
+      @items = Item.where("name LIKE ? AND category_id = ?" , "%#{wildcard_search}%", cat_id).paginate(:page => params[:page], :per_page => @per_page).order("#{@sort_by} ASC")
     end
 
     @category = Category.find(params[:cat_id])
@@ -20,7 +18,7 @@ class ItemsController < ApplicationController
   def search
     @search = params[:search_string]
     wildcard_search = "%#{@search}%"
-    @items = Item.where("name LIKE ?" , "%#{wildcard_search}%").paginate(:page => params[:page], :per_page => @per_page)
+    @items = Item.where("name LIKE ?" , "%#{wildcard_search}%").paginate(:page => params[:page], :per_page => @per_page).order("#{@sort_by} ASC")
 
     render 'index'
   end
@@ -36,6 +34,12 @@ class ItemsController < ApplicationController
       @per_page = 3
     else
       @per_page = params[:per_page].to_i
+    end
+
+    if params[:sort_by]
+      @sort_by = params[:sort_by]
+    else
+      @sort_by = 'name'
     end
   end
 end
