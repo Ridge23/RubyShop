@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  get 'items/:cat_id', to: 'items#index', as: 'items_root'
+  get 'items/index/:cat_id', to: 'items#index', as: 'items_root'
 
   get 'items/show/:id', to: 'items#show', as: 'item_show'
+
+  get 'items/search', to: 'items#search', as: 'items_search'
 
   get 'persons/profile'
 

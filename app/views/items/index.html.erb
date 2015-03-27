@@ -1,11 +1,20 @@
-<h2><%= @category.name %></h2>
-Items on page:
+<h2>
+  <% if @category %>
+    <%= @category.name %>
+  <% else %>
+    Search
+  <% end %>
+</h2>
 <form method="GET" >
+    Items on page:
     <select name="per_page" onchange="this.form.submit()">
       <% @pages_count.each do |num| %>
         <option <% if ( @per_page == num ) %>selected<% end %> ><%= num %></option>
       <% end %>
     </select>
+    Search:
+    <input type="text" name="search_string" value="<%= @search %>" />
+    <input type="submit" value="Search"  />
 </form>
 <div class="row">
   <% @items.each do |item| %>
