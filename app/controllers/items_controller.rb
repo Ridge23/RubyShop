@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
     @pages_count = [3,6,9,12]
 
     if !params[:per_page]
-      @per_page = 3
+      @per_page = 9
     else
       @per_page = params[:per_page].to_i
     end
