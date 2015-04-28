@@ -41,4 +41,9 @@ ActiveAdmin.register Item do
       params.permit!
     end
   end
+
+  member_action :main_items do
+    @comments = resource.comments
+    # This will render app/views/admin/posts/comments.html.erb
+  end
 end
