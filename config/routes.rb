@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'items/index/:cat_id', to: 'items#index', as: 'items_root'
 
   get 'items/show/:id', to: 'items#show', as: 'item_show'
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   get 'items/search', to: 'items#search', as: 'items_search'
 
   get 'persons/profile'
+
+  post 'order', to: 'order#order', as: 'order'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

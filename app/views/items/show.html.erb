@@ -2,4 +2,22 @@
 <p><%= @item.description %></p>
 <%= image_tag @item.image.url(:medium) %>
 <p>Price: <%= @item.price %> $</p>
-<input type="button" value="Buy" />
+
+<input type="button" value="Buy" class="btn btn-info buy_button"/>
+
+<script>
+  $('.buy_button').click(function() {
+      $.ajax({
+          method: "POST",
+          url: "<%= order_path %>.json",
+          context: document.body,
+          dataType: 'json',
+          data: {
+            'item_id': <%= @item.id %>
+          }
+      }).done(function() {
+          $('.buy_button').val("done");
+          $('.buy_button').attr('disabled','disabled');
+      });
+  });
+</script>
