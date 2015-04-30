@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   def set_user_cookie
     if !cookies[:cart_id]
-      cookies[:cart_id] = Base64.encode64(Date.new.to_time.to_s)
+      cookies[:cart_id] = Base64.encode64(DateTime.now.to_s)
     end
   end
 
