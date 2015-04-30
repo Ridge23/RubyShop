@@ -1,10 +1,10 @@
 class OrderController < ApplicationController
   def add_item
-    current_order = Order.find_by_session_id(session.id)
+    current_order = Order.find_by_session_id(cookies[:cart_id])
     item_to_add = Item.find(params[:item_id])
     if !current_order
       current_order = Order.new
-      current_order.session_id = session.id
+      current_order.session_id = cookies[:cart_id]
       current_order.save
     end
     current_order.items << item_to_add
@@ -17,26 +17,21 @@ class OrderController < ApplicationController
   end
 
   def cart
-    current_order = Order.find_by_session_id(session.id)
+    current_order = Order.find_by_session_id(cookies[:cart_id])
     full_price = 0
     if current_order
       if current_order.items
-        current_order.items.each do |item|
-          full_price += item.price
-        end
+        full_price = current_order.total_price
         @items = current_order.items
       end
     end
 
-
     @full_price = full_price
-
-
   end
 
   def delete_item
     item_to_delete = Item.find(params[:item_id])
-    current_order = Order.find_by_session_id(session.id)
+    current_order = Order.find_by_session_id(cookies[:cart_id])
     current_order.items.delete(item_to_delete)
 
     @response = [:status => 'success', :item_id => item_to_delete.id]

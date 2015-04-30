@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   after_filter :store_location
 
+  before_filter :set_user_cookie
+
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     return unless request.get?
@@ -21,6 +23,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
+  end
+
+  def set_user_cookie
+    if !cookies[:cart_id]
+      cookies[:cart_id] = Base64.encode64(Date.new.to_time.to_s)
+    end
   end
 
 end
