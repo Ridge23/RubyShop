@@ -9,7 +9,7 @@
   $('.buy_button').click(function() {
       $.ajax({
           method: "POST",
-          url: "<%= order_path %>.json",
+          url: "<%= order_item_add_path %>.json",
           context: document.body,
           dataType: 'json',
           data: {

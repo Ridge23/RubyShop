@@ -1,0 +1,42 @@
+<h3>Shopping cart</h3>
+
+<% if @items %>
+<table class="table table-striped">
+  <tbody>
+    <% @items.each_with_index do |item, index| %>
+        <tr id="item_tr_<%= item.id %>">
+          <td><%= index + 1 %></td>
+          <td><%= item.name %></td>
+          <td><%= item.price %>$</td>
+          <td><a href="#" item_id="<%= item.id %>" class="delete_button" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+Total price: <%= @full_price %>$
+
+<form action="<%= make_order_path %>">
+    <input type="submit" class="btn btn-info" value="Make Order" />
+</form>
+<% else %>
+    You currently don't have items to buy
+<% end %>
+
+
+
+<script>
+    $('.delete_button').click(function() {
+        var item_id = $(this).attr('item_id');
+        $.ajax({
+            method: "DELETE",
+            url: "<%= order_item_delete_path %>.json",
+            context: document.body,
+            dataType: 'json',
+            data: {
+                'item_id': item_id
+            }
+        }).done(function( data ) {
+            $('#item_tr_' + data[0].item_id).hide();
+        });
+    });
+</script>

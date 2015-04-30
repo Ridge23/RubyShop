@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
   get 'persons/profile'
 
-  post 'order', to: 'order#order', as: 'order'
+  post 'order', to: 'order#add_item', as: 'order_item_add'
+  delete 'order', to: 'order#delete_item', as: 'order_item_delete'
+
+  get 'make_order', to: 'make_order#index', as: 'make_order'
+
+  get 'cart', to: 'order#cart', as: 'cart'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
