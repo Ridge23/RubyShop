@@ -14,15 +14,13 @@ class OrderController < ApplicationController
   def cart
     current_orders = Order.where(session_id: cookies[:cart_id], is_finished: false)
     current_order = current_orders[0]
-    full_price = 0
+    @full_price = 0
     if current_order
       if current_order.items
-        full_price = current_order.total_price
+        @full_price = current_order.total_price
         @items = current_order.items
       end
     end
-
-    @full_price = full_price
   end
 
   def delete_item
